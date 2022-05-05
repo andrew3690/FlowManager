@@ -1,5 +1,14 @@
 from datetime import datetime
 from threading import Timer
+
+import time, sched
+
+currenttime = time.strftime("%H:%M") # actual hour, must sum +3, due to instance being from UK
+week_days = {0:"Monday",1:"Tuesday",2:"Wendesday",3:"Thursday",4:"Friday",5:"Saturday",6:"Sunday"}
+dt = datetime.today()
+dt = dt.weekday()
+print(f"dia da semana :{week_days[dt]}")
+
 # idéias:
 # encapsular essa função, para coordenar os fluxos, tendo como parametros o dia da semana, hora e minuto
 # para descobirir o dia da semana, preciso fazer o cálculo de que dia do mes é este durante a semana 
@@ -29,5 +38,7 @@ def hello_world():
     return "hello world"
     #...
 # chamada do disparador
+'''
 t = Timer(secs, hello_world)
 t.start()
+'''
