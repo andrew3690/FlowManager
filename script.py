@@ -4,6 +4,7 @@ from threading import Timer
 import time, sched
 import schedule
 import requests
+from requests.exceptions import Timeout
 
 # Getting hour of the day, flows must be triggred at 6:50 (UTC - 3) Brasília Hour
 currenttime = time.strftime("%H:%M") # actual hour, must sum +3, due to instance being from UK
@@ -35,10 +36,12 @@ class Event:
 
     # Flow Trigger
     def trigger(self,name):
-        request = requests.post(urls[name]) # Http request sender 
-        print(request)
-        # print(f"Http Request sucessfull on {week_days[self.actday]} at {currenttime}, content: {request.json}") # returning sucess http requests  
-
+        try:
+            request = requests.post(urls[name]) # Http request sender 
+        except Timeout:
+            print(f"Http Request unsucessfull on {week_days[self.actday]} at {currenttime}, content: {request.json}") # returning sucess http requests
+        else:
+            print(f"Http Request sucessfull on {week_days[self.actday]} at {currenttime}, content: {request.json}") # returning sucess http requests
     # Flow manager, gets hours and minutes and excecution name of the requested Flows
     def manager(self): 
         hr = f"{self.hour}:{self.minute}"
@@ -47,7 +50,6 @@ class Event:
         if (currt_day in exc_days):
             if(currenttime == hr):
                 self.trigger(self.name)
-                print("deu certo")
             # schedule.every().day.at(hr).do(self.trigger(self.name))
         
 if __name__ == '__main__':
