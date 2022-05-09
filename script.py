@@ -18,23 +18,23 @@ week_days = {0:"Monday",1:"Tuesday",2:"Wendesday",3:"Thursday",4:"Friday",5:"Sat
 # needing more urls to send Http requests
 urls = {
     # Stockout
-    "stockout": 'https://prod-154.westus.logic.azure.com:443/workflows/939f221ae6c642b5a53e911f9239a7bd/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oE8KaUl0GcZsufQjHqGFd1EFrFjxhF5baU-nwfbvl64',
+    "stockout": '',
     # A1 - Reporte Diário Metais, Pincéis e Tubos
-	"reportdi": 'https://prod-21.westus.logic.azure.com:443/workflows/3e1ad68b82b0446c93bc8eb9f6a5c57f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OU5qwZhocagJo-Nrhkuq33fyrmqJ-F5a-_u4PekERxI',
+	"reportdi": '',
 	# Reports Fretes A4
-	"reporta4": 'https://prod-07.westus.logic.azure.com:443/workflows/f49f22e710b94fee93a74ed81dcfc115/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JNSNVZF3zC8oXoHlhjHQqhoQN_6SDEgeI2p2gHw_aUg',
+	"reporta4": '',
 	# Report Internacional A4	
-	"reportInterA4":'https://prod-148.westus.logic.azure.com:443/workflows/010bfcac5b5e4956a2db9dacf3494706/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-IEEaeoew1quHxttnKrXcte_LVF1ubIlAW2QRENuiqQ',
+	"reportInterA4":'',
 	# Enviar Reportes A1
-	"reporta1": 'https://prod-27.westus.logic.azure.com:443/workflows/21fd4b37ed21406cbe2c5fa17aa6c56b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PiHi4N4TwsMinAerVguSXHgLc4zB5LrNqd2xs6_buoc',
+	"reporta1": '',
 	# Enviar Report A4 - Daily Excels Dura (Orders,Central)
-	"reportdailydura": 'https://prod-53.westus.logic.azure.com:443/workflows/5db7157bf1c14c5a811e2cba3e4bb0dc/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=klCW_etIs1tN5wDVUO0gEKh37iJXVZpuHrMnSCynVzg',
+	"reportdailydura": '',
 	# Top Line - A1	
-	"topline":'https://prod-180.westus.logic.azure.com:443/workflows/0b105b3827ae46718bff30798ce7bbe7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zePvoBCtNc4u434_m97A_BWmuoSASg6E_5lX_o_GX-0',
+	"topline":'',
 	# A4 - HomeDepot Inventory Report	
-	"homedepot":'https://prod-155.westus.logic.azure.com:443/workflows/0cbef8bdea834111b65f245c4b0ba9b8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ukkCwi2GRzkWy2C9h5UE77eG5bOixCQsOH-Pt2shkJI',
+	"homedepot":'',
 	# Report USA - OrdersBookedA4	
-	"reportusa":'https://prod-66.westus.logic.azure.com:443/workflows/467e2d0393f14bd4b9857fda80eb9263/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=kBRCmKW67X7kQyKU52taJ5mdcmT-uOCaC8UBmXGjYWo'
+	"reportusa":''
 
 }
 
