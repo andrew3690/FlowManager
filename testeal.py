@@ -1,57 +1,51 @@
-import sched
-import time
-from requests.exceptions import Timeout
-import requests
 from datetime import datetime as dt
+from re import I
+import pandas as pd
+import requests
+from requests import Timeout
+import time
 
+# Reading excel file
+orch = pd.read_excel("myfile.xls", engine= "openpyxl")
+#print(orch)
+# Getting index and name of the event
+name = pd.DataFrame(orch,columns = ['Nome'])
+
+# getting name and url to handle event 
+eventurl = pd.DataFrame(orch, columns=['Nome','Url'])
+
+# getting hour of event
+hrs = pd.DataFrame(orch,columns=['Nome','Hora'])
+
+# getting day of event
+days = pd.DataFrame(orch,columns=['Nome','Dia'])
+
+# Getting hour of the day, flows must be triggred at 6:50 (UTC - 3) Brasília Hour
 currenttime = time.strftime("%H:%M") # actual hour, must sum +3, due to instance being from UK
-actualday = dt.today().strftime('%A')
-week_days = ["Monday","Tuesday","Wendesday","Thursday","Friday","Saturday","Sunday"] #days of the week
 
-urls = {
-    # Stockout
-    "stockout": 'https://prod-154.westus.logic.azure.com:443/workflows/95a2d9a704674e38b2b44596b7cdd878/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RRCU5_EHl6xHkzhpKgrIVOCntQzCzFCzvkUecphDxaI',
-    "reportdi": 'https://prod-108.westus.logic.azure.com:443/workflows/8895e7b9f59547ffac8b53fa42ecddab/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=TuNClx63T1rbvoCVjuCZkFbhyCz1lQocbi7g1Z--9xM'
-    #"reporta4":,
-    #"reportInterA4":,
-    #"reportstock":,
-    #"reportusa":,
-    #"reporthomedepot":,
-    #"topline":,
-    #"dailyexcels":
-}
-  
-# instance is created
-scheduler = sched.scheduler(time.time,
-                            time.sleep)
-  
-# function to print time and
-# name of the event
+# getting actual day of the week  
+actualday = dt.today().strftime('%A') # getting actual day of the week
+
+## Function Trigger
 def trigger(name):
+    url = eventurl.loc[eventurl.Nome == name,'Url'].values[0]
     try:
-        request = requests.post(urls[name]) # Http request sender 
+        request = requests.post(url) # Http request sender
+
     except Timeout:
-        print(f"Http Request unsucessfull on {actualday} at {currenttime}, content: {request.json}") # returning sucess http requests
+        print(f"Http Request unsucessfull on {actualday} at {currenttime}, content: {request.json}") # returning failure http requests
     else:
         print(f"Http Request sucessfull on {actualday} at {currenttime}, content: {request.json}") # returning sucess http requests
-  
-# printing starting time
-  
-# event x with delay of 1 second
-# enters queue using enterabs method
-if (currenttime == "7:00" and actualday in week_days):
-        stockout = scheduler.enterabs(time.time(), 1,
-                         trigger, 
-                         argument = ("stockout", ))
 
-        reportdi = scheduler.enterabs(time.time()+1, 1,
-                         trigger, 
-                         argument = ("reportdi", ))
+def Manager(name,hora,days):
+    if actualday in days and hora == actualday:
+        print(f"Flow {name} being executed on {actualday} at {hr}")
+        trigger(name)
+    else:
+        print(f"Flow {name} must not be excuted now")
 
-'''
-reporta4 = scheduler.enterabs(time.time()+1, 2,
-                         trigger, 
-                         argument = ("reporta4", ));
-'''
-# executing the events
-scheduler.run()
+if __name__ == '__main__':
+    for colname in name.index:
+        evento, hr,day  = name["Nome"][colname], hrs["Hora"][colname], days["Dia"][colname]
+        print(f"Evento: {evento}, Hora: {hr}, Dia: {day}")
+        Manager(evento,hr,days)
